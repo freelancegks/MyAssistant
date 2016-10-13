@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    DatabaseHelper Helper = new DatabaseHelper(this);
     private RadioGroup loginSelect;
     private RadioButton LoginSelected;
 
@@ -19,38 +20,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+     }
+
+    public  void register(View V){
+        if (V.getId()== R.id.Register){
+            Intent registration = new Intent(MainActivity.this,Registration.class);
+            startActivity(registration);
+        }
     }
 
+
     public void onloginclick(View V) {
-
         if (V.getId() == R.id.login) {
-            EditText EmailAdd = (EditText) findViewById(R.id.EmailAdd);
-            EditText Passwordtext = (EditText) findViewById(R.id.pwd);
-
             /* Validate email address & Password. Proceed with login */
-            String EmailAddr = EmailAdd.getText().toString().trim();
-            String Pwd = Passwordtext.getText().toString().trim();
+            String EmailAddr = ((EditText) findViewById(R.id.EmailAdd)).getText().toString().trim();
+            String Pwd = ((EditText) findViewById(R.id.pwd)).getText().toString().trim();
             String EmailPattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 
-            if (EmailAddr.matches(EmailPattern)) {
-                if (Pwd.length() > 8 && Pwd.length() < 12) {
-                     /*
-                    loginSelect = (RadioGroup) findViewById(R.id.RadioUser);
-                    int selectedId = loginSelect.getCheckedRadioButtonId();
-                    LoginSelected = (RadioButton) findViewById(selectedId);
+            String Pass = Helper.searchpass(EmailAddr);
 
-                   /* Toast.makeText(MainActivity.this, EmailAddr, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(MainActivity.this, Pwd, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(MainActivity.this, LoginSelected.getText(), Toast.LENGTH_SHORT).show();*/
-
-                    Intent i = new Intent(MainActivity.this, UserLogin.class);
-                    startActivity(i);
-                } else {
-                    Toast.makeText(MainActivity.this, "Password should be Min 8 & Max 12 characters", Toast.LENGTH_LONG).show();
-                }
-            } else {
-                Toast.makeText(MainActivity.this, "Please enter valid email address", Toast.LENGTH_LONG).show();
+            if (Pwd.equals(Pass)){
+                Intent i = new Intent(MainActivity.this, UserLogin.class);
+                startActivity(i);
+            }else{
+                Toast.makeText(MainActivity.this, "Invalid EmailAddress or Password. Try again", Toast.LENGTH_LONG).show();
             }
         }
+
     }
 }

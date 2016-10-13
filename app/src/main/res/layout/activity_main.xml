@@ -104,7 +104,15 @@
             android:text="@string/Register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button2" />
+            android:id="@+id/Register"
+            android:onClick="register" />
+
+        <Button
+            android:text="delete table data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/button" />
 
     </LinearLayout>
 

@@ -1,9 +1,15 @@
 <component name="ProjectDictionaryState">
   <dictionary name="SriBhargavi">
     <words>
+      <w>addr</w>
       <w>blogin</w>
       <w>emailadd</w>
+      <w>insertcontact</w>
       <w>logingroup</w>
+      <w>onloginclick</w>
+      <w>onsave</w>
+      <w>regtitle</w>
+      <w>searchpass</w>
       <w>signin</w>
     </words>
   </dictionary>
